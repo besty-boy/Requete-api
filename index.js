@@ -1,8 +1,14 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 
 const targetAPI = 'http://88.198.66.157:27029';
+
+
+app.use(cors());
+
+app.use(express.json());
 
 app.use((req, res) => {
     const url = `${targetAPI}${req.url}`;
