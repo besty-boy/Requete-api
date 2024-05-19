@@ -5,8 +5,15 @@ const app = express();
 
 const targetAPI = 'http://88.198.66.157:27029';
 
+const corsOptions = {
+    origin: 'https://dev-web.me', // Origine autorisée
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); 
 
 app.use(express.json());
 
@@ -16,7 +23,10 @@ app.use((req, res) => {
         method: req.method,
         url: url,
         data: req.body,
-        headers: { ...req.headers }
+        headers: { 
+            ...req.headers,
+            host: targetAPI.split('//')[1] 
+        }
     }).then(response => {
         res.status(response.status).send(response.data);
     }).catch(error => {
