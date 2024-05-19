@@ -17,7 +17,7 @@ app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
-app.post('*', (req, res) => {
+app.use((req, res) => {
     const url = `${targetAPI}${req.url}`;
     axios({
         method: req.method,
@@ -37,7 +37,6 @@ app.post('*', (req, res) => {
         }
     });
 });
-
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
