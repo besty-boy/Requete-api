@@ -6,7 +6,7 @@ const app = express();
 const targetAPI = 'http://88.198.66.157:27029';
 
 const corsOptions = {
-    origin: 'https://dev-web.me', 
+    origin: '*', 
     methods: 'GET,POST,PUT,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization',
     credentials: true
